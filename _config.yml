@@ -4,14 +4,13 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 auto: true
 pygments: true
 paginate: 4
+markdown: rdiscount
 
-title : 隐匿于黑夜中的星
+title : ::谢绝一切华而不实，实而无用的需求，不浮夸，不骄躁，重人品，尚技术!
 tagline: 时间的回响，思维的残影
 author :
-  name : codepiano
-  email : anyexingchen999@qq.com
-  github : https://github.com/codepiano
-  twitter : http://twitter.com/anyexingchen
+  name : HILOLT
+  github : https://github.com/hilolt
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -21,11 +20,11 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://HILOLT.github.io
+production_url : http://hilolt.github.io
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
-codepiano :
+hilolt :
   version : 0.3.0
 
   # All links will be namespaced by BASE_PATH if defined.
@@ -84,10 +83,7 @@ codepiano :
   # Set 'provider' to the analytics provider you want to use.
   # Set 'provider' to false to turn analytics off globally.
   #        
-  analytics :
-    provider : google 
-    google : 
-        tracking_id : 'UA-40934298-1'
+
 
   # Settings for sharing helper. 
   # Sharing is for things like tweet, plusone, like, reddit buttons etc.
