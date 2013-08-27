@@ -1,0 +1,8 @@
+{% if site.safe and site.hilolt.sharing.provider and page.hilolt.sharing != false %}
+
+{% case site.hilolt.sharing.provider %}
+{% when "custom" %}
+  {% include custom/sharing %}
+{% endcase %}
+
+{% endif %}
