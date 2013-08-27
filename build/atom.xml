@@ -2,21 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>隐匿于黑夜中的星</title>
- <link href="http://codepiano.github.io/" rel="self"/>
- <link href="http://codepiano.github.io"/>
+ <link href="http://hilolt.github.io/" rel="self"/>
+ <link href="http://hilolt.github.io"/>
  <updated>2013-08-13T04:40:37+08:00</updated>
- <id>http://codepiano.github.io</id>
+ <id>http://hilolt.github.io</id>
  <author>
-   <name>codepiano</name>
+   <name>hilolt</name>
    <email>anyexingchen999@qq.com</email>
  </author>
 
  
  <entry>
    <title>vim插件surround介绍</title>
-   <link href="http://codepiano.github.io/Vim/Vim Plugin/2013/08/12/vim-surround"/>
+   <link href="http://hilolt.github.io/Vim/Vim Plugin/2013/08/12/vim-surround"/>
    <updated>2013-08-12T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Vim/Vim Plugin/2013/08/12/vim-surround</id>
+   <id>http://hilolt.github.io/Vim/Vim Plugin/2013/08/12/vim-surround</id>
    <content type="html">
 
 &lt;h3&gt;插件作者&lt;/h3&gt;
@@ -269,9 +269,9 @@ testtest
  
  <entry>
    <title>推送git项目到多个远程仓库</title>
-   <link href="http://codepiano.github.io/Git/2013/07/03/push-multi-remote-repositories"/>
+   <link href="http://hilolt.github.io/Git/2013/07/03/push-multi-remote-repositories"/>
    <updated>2013-07-03T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Git/2013/07/03/push-multi-remote-repositories</id>
+   <id>http://hilolt.github.io/Git/2013/07/03/push-multi-remote-repositories</id>
    <content type="html">
 
 &lt;p class=&quot;paragraph&quot;&gt;
@@ -289,15 +289,15 @@ testtest
 &lt;div class=&quot;highlight&quot;&gt;
 &lt;pre&gt;
 [remote &quot;origin&quot;]
-	url = git@github.com:codepiano/pull-all-git-project.git
-	url = git@git.oschina.net:codepiano/pull-all-git-project.git
+	url = git@github.com:hilolt/pull-all-git-project.git
+	url = git@git.oschina.net:hilolt/pull-all-git-project.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;p class=&quot;paragraph&quot;&gt;
 当然，使用命令行也可以直接添加，命令格式如下：
 &lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;git remote &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-url --add origin git@git.oschina.net:codepiano/pull-all-git-project.git
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;git remote &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-url --add origin git@git.oschina.net:hilolt/pull-all-git-project.git
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -307,9 +307,9 @@ testtest
  
  <entry>
    <title>vim zencoding插件的一个bug的跟踪和解决过程</title>
-   <link href="http://codepiano.github.io/Vim/Vimscript/2013/05/27/bug-trace-of-vim-zencoding-plugin"/>
+   <link href="http://hilolt.github.io/Vim/Vimscript/2013/05/27/bug-trace-of-vim-zencoding-plugin"/>
    <updated>2013-05-27T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Vim/Vimscript/2013/05/27/bug-trace-of-vim-zencoding-plugin</id>
+   <id>http://hilolt.github.io/Vim/Vimscript/2013/05/27/bug-trace-of-vim-zencoding-plugin</id>
    <content type="html">
 
 
@@ -412,15 +412,15 @@ testtest
  
  <entry>
    <title>生成表格边框的vim插件</title>
-   <link href="http://codepiano.github.io/Vim/Vimscript/2013/05/06/vim-plugin-generate-table-border-with-symbol"/>
+   <link href="http://hilolt.github.io/Vim/Vimscript/2013/05/06/vim-plugin-generate-table-border-with-symbol"/>
    <updated>2013-05-06T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Vim/Vimscript/2013/05/06/vim-plugin-generate-table-border-with-symbol</id>
+   <id>http://hilolt.github.io/Vim/Vimscript/2013/05/06/vim-plugin-generate-table-border-with-symbol</id>
    <content type="html">
 
 &lt;p class=&quot;paragraph&quot;&gt;
 vim插件，惟一用途是在文本文件中来展示表格，使用字符来模拟表格的边框。会破坏原始数据，不便于复制，
 请谨慎使用。由于字符的展示方式与字体有关，可能某些字体下边框不能完美的对齐。
-项目地址:&lt;a href=&quot;https://github.com/codepiano/TableKnight&quot;&gt;codepiano/TableKnight · GitHub&lt;/a&gt;
+项目地址:&lt;a href=&quot;https://github.com/hilolt/TableKnight&quot;&gt;hilolt/TableKnight · GitHub&lt;/a&gt;
 &lt;/p&gt;
 &lt;p class=&quot;paragraph&quot;&gt;
 插件会根据分隔符自动分割选定的文本行，然后插入边框字符。例如：下面的字符
@@ -451,9 +451,9 @@ vim插件，惟一用途是在文本文件中来展示表格，使用字符来�
  
  <entry>
    <title>更新路径下所有git项目和项目中的子模块</title>
-   <link href="http://codepiano.github.io/Code/Script/2013/04/04/pull-all-git-project"/>
+   <link href="http://hilolt.github.io/Code/Script/2013/04/04/pull-all-git-project"/>
    <updated>2013-04-04T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Code/Script/2013/04/04/pull-all-git-project</id>
+   <id>http://hilolt.github.io/Code/Script/2013/04/04/pull-all-git-project</id>
    <content type="html">
 
 
@@ -504,14 +504,14 @@ git submodule update
  
  <entry>
    <title>将rapid validation的库依赖从prototype.js迁移到jquery</title>
-   <link href="http://codepiano.github.io/Web/Javascript/2012/11/26/change-rapid-validation-dependence-to-jquery"/>
+   <link href="http://hilolt.github.io/Web/Javascript/2012/11/26/change-rapid-validation-dependence-to-jquery"/>
    <updated>2012-11-26T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Web/Javascript/2012/11/26/change-rapid-validation-dependence-to-jquery</id>
+   <id>http://hilolt.github.io/Web/Javascript/2012/11/26/change-rapid-validation-dependence-to-jquery</id>
    <content type="html">
 
 &lt;p class=&quot;paragraph&quot;&gt;该项目是由baiqiu编写的RapidValidation校验框架，框架原始的依赖是prototype.js，
 为了以后维护和改造,将库的依赖替换成了jQuery，目前已完成了基本功能的改造,去掉了tooltip和effect，
-项目地址：&lt;a href=&quot;https://github.com/codepiano/RapidValidation&quot;&gt;codepiano/RapidValidation · GitHub&lt;/a&gt;
+项目地址：&lt;a href=&quot;https://github.com/hilolt/RapidValidation&quot;&gt;hilolt/RapidValidation · GitHub&lt;/a&gt;
 &lt;/p&gt;
 
 &lt;h2&gt;
@@ -529,9 +529,9 @@ git submodule update
  
  <entry>
    <title>在cmd命令行下快速切换工作目录</title>
-   <link href="http://codepiano.github.io/Code/Script/2012/06/29/quickly-change-working-dir-in-cmd"/>
+   <link href="http://hilolt.github.io/Code/Script/2012/06/29/quickly-change-working-dir-in-cmd"/>
    <updated>2012-06-29T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Code/Script/2012/06/29/quickly-change-working-dir-in-cmd</id>
+   <id>http://hilolt.github.io/Code/Script/2012/06/29/quickly-change-working-dir-in-cmd</id>
    <content type="html">
 
 
@@ -555,7 +555,7 @@ ls.bat可以在cmd里面切换工作路径，po.bat可以直接打开路径对�
 &lt;/p&gt;
 
 &lt;p class=&quot;paragraph&quot;&gt;
-项目地址:&lt;a href=&quot;https://github.com/codepiano/GuideBoard&quot;&gt;codepiano/GuideBoard · GitHub&lt;/a&gt;
+项目地址:&lt;a href=&quot;https://github.com/hilolt/GuideBoard&quot;&gt;hilolt/GuideBoard · GitHub&lt;/a&gt;
 &lt;/p&gt;
 
 </content>
@@ -563,9 +563,9 @@ ls.bat可以在cmd里面切换工作路径，po.bat可以直接打开路径对�
  
  <entry>
    <title>《编程珠玑》习题-如何用位逻辑实现位向量</title>
-   <link href="http://codepiano.github.io/Code/C/2012/05/08/sort-large-number-of-integers"/>
+   <link href="http://hilolt.github.io/Code/C/2012/05/08/sort-large-number-of-integers"/>
    <updated>2012-05-08T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Code/C/2012/05/08/sort-large-number-of-integers</id>
+   <id>http://hilolt.github.io/Code/C/2012/05/08/sort-large-number-of-integers</id>
    <content type="html">
 
 &lt;p class=&quot;paragraph&quot;&gt;
@@ -646,9 +646,9 @@ c++中的标准模板库已经提供了bitset这个数据结构。 实现的原�
  
  <entry>
    <title>100个常用的vim命令中文版</title>
-   <link href="http://codepiano.github.io/Vim/Tips/2012/04/04/100-vim-commands"/>
+   <link href="http://hilolt.github.io/Vim/Tips/2012/04/04/100-vim-commands"/>
    <updated>2012-04-04T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Vim/Tips/2012/04/04/100-vim-commands</id>
+   <id>http://hilolt.github.io/Vim/Tips/2012/04/04/100-vim-commands</id>
    <content type="html">
 
 
@@ -675,9 +675,9 @@ c++中的标准模板库已经提供了bitset这个数据结构。 实现的原�
  
  <entry>
    <title>vim中添加快速单词查询功能</title>
-   <link href="http://codepiano.github.io/Vim/Vimscript/2012/03/24/translate-word-under-cursor-in-vim"/>
+   <link href="http://hilolt.github.io/Vim/Vimscript/2012/03/24/translate-word-under-cursor-in-vim"/>
    <updated>2012-03-24T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Vim/Vimscript/2012/03/24/translate-word-under-cursor-in-vim</id>
+   <id>http://hilolt.github.io/Vim/Vimscript/2012/03/24/translate-word-under-cursor-in-vim</id>
    <content type="html">
 
 
@@ -755,9 +755,9 @@ nmap &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;leader&lt;span class=&
  
  <entry>
    <title>JQuery DataTables插件中文文档</title>
-   <link href="http://codepiano.github.io/Web/Javascript/2012/03/02/jquery-datatables-config-cn"/>
+   <link href="http://hilolt.github.io/Web/Javascript/2012/03/02/jquery-datatables-config-cn"/>
    <updated>2012-03-02T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Web/Javascript/2012/03/02/jquery-datatables-config-cn</id>
+   <id>http://hilolt.github.io/Web/Javascript/2012/03/02/jquery-datatables-config-cn</id>
    <content type="html">
 
 &lt;p class=&quot;paragraph&quot;&gt;
@@ -801,9 +801,9 @@ nmap &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;leader&lt;span class=&
  
  <entry>
    <title>人人网主页在遨游浏览器内超级拖放功能失效</title>
-   <link href="http://codepiano.github.io/Web/Javascript/2011/12/25/super-drag-invalid-in-renren-homepage-with-maxthon"/>
+   <link href="http://hilolt.github.io/Web/Javascript/2011/12/25/super-drag-invalid-in-renren-homepage-with-maxthon"/>
    <updated>2011-12-25T00:00:00+08:00</updated>
-   <id>http://codepiano.github.io/Web/Javascript/2011/12/25/super-drag-invalid-in-renren-homepage-with-maxthon</id>
+   <id>http://hilolt.github.io/Web/Javascript/2011/12/25/super-drag-invalid-in-renren-homepage-with-maxthon</id>
    <content type="html">
 
 
