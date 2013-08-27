@@ -1,12 +1,12 @@
-{% if site.safe and site.codepiano.analytics.provider and page.codepiano.analytics != false %}
+{% if site.safe and site.hilolt.analytics.provider and page.hilolt.analytics != false %}
 
-{% case site.codepiano.analytics.provider %}
+{% case site.hilolt.analytics.provider %}
 {% when "google" %}
-  {% include codepiano/analytics-providers/google %}
+  {% include hilolt/analytics-providers/google %}
 {% when "getclicky" %}
-  {% include codepiano/analytics-providers/getclicky %}
+  {% include hilolt/analytics-providers/getclicky %}
 {% when "mixpanel" %}
-  {% include codepiano/analytics-providers/mixpanel %}
+  {% include hilolt/analytics-providers/mixpanel %}
 {% when "custom" %}
   {% include custom/analytics %}
 {% endcase %}

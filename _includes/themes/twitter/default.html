@@ -58,7 +58,7 @@
           <div class="span8">
             <a class="brand" href="{{ HOME_PATH }}">
               <span class="site-author"> {{ site.author.name }} </span>
-              <span class="site-title"> /* {{ site.title }} */ </span>
+              <span class="site-title">  {{ site.title }}  </span>
             </a>
             <ul class="nav">
               {% assign pages_list = site.pages %}
@@ -75,12 +75,23 @@
       {{ content }}
 
     </div>
-    <!-- 底部声明 -->
+    <!-- 底部声明 
     <div class="row-fluid bottom">
       <div class="span2">
       </div>
       <div class="span8 text-center">
         &mdash;&nbsp;&nbsp;<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" class="license">原创作品许可 &mdash; 署名-非商业性使用-禁止演绎 3.0 未本地化版本 &mdash; CC BY-NC-ND 3.0 </a>&nbsp;&nbsp;&mdash;
+      </div>
+      <div class="span2">
+      </div>
+    </div>
+	-->
+	<!-- 底部声明 -->
+    <div class="row-fluid bottom">
+      <div class="span2">
+      </div>
+      <div class="span8 text-center">
+		<p><small>Powered by <a href="https://github.com/mojombo/jekyll">Jekyll</a> & <a href="http://pages.github.com">GitHub</a> | Copyright 2012 - {{site.time | date:"%Y"}} by <a href="http://hilolt.github.io/about.html">HILOLT</a> | <span class="label label-info" id="timeSpan"></span></small></p>
       </div>
       <div class="span2">
       </div>

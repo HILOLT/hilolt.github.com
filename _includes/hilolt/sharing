@@ -1,6 +1,6 @@
-{% if site.safe and site.codepiano.sharing.provider and page.codepiano.sharing != false %}
+{% if site.safe and site.hilolt.sharing.provider and page.hilolt.sharing != false %}
 
-{% case site.codepiano.sharing.provider %}
+{% case site.hilolt.sharing.provider %}
 {% when "custom" %}
   {% include custom/sharing %}
 {% endcase %}

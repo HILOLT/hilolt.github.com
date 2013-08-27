@@ -1,0 +1,209 @@
+---
+layout: post
+keywords: android ,animation
+description: blog
+title: "自定义android 3D 动画 "
+categories: [android ,animation]
+tags: [android ,animation]
+icon: file-alt
+---
+###**实现原理：**
+#### **重写Animation，使用旋转动画，使2个页面同时实现旋转。**
+---
+Rotate3dAnimation.java
+{% highlight java %}
+/**
+ * 3d旋转
+ * @author HILOLT
+ *
+ */
+public class Rotate3dAnimation extends Animation {
+    private final float mFromDegrees;
+    private final float mToDegrees;
+    private final float mCenterX;
+    private final float mCenterY;
+    private final float mDepthZ;
+    private final boolean mReverse;
+    private Camera mCamera;
+
+    public Rotate3dAnimation(float fromDegrees, float toDegrees,
+            float centerX, float centerY, float depthZ, boolean reverse) {
+        mFromDegrees = fromDegrees;
+        mToDegrees = toDegrees;
+        mCenterX = centerX;
+        mCenterY = centerY;
+        mDepthZ = depthZ;
+        mReverse = reverse;
+    }
+
+    @Override
+    public void initialize(int width, int height, int parentWidth, int parentHeight) {
+        super.initialize(width, height, parentWidth, parentHeight);
+        mCamera = new Camera();
+    }
+
+    @Override
+    protected void applyTransformation(float interpolatedTime, Transformation t) {
+        final float fromDegrees = mFromDegrees;
+        float degrees = fromDegrees + ((mToDegrees - fromDegrees) * interpolatedTime);
+
+        final float centerX = mCenterX;
+        final float centerY = mCenterY;
+        final Camera camera = mCamera;
+
+        final Matrix matrix = t.getMatrix();
+
+        camera.save();
+        if (mReverse) {
+            camera.translate(0.0f, 0.0f, mDepthZ * interpolatedTime);
+        } else {
+            camera.translate(0.0f, 0.0f, mDepthZ * (1.0f - interpolatedTime));
+        }
+        camera.rotateY(degrees);
+        camera.getMatrix(matrix);
+        camera.restore();
+
+        matrix.preTranslate(-centerX, -centerY);
+        matrix.postTranslate(centerX, centerY);
+    }
+}
+
+{% endhighlight %}
+---
+DemoRotate3dAnimation.java
+{% highlight java %}
+public class DemoRotate3dAnimation extends Activity {
+	ImageView iv1,iv2;
+	Button b2;
+	ToggleButton b1;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.rotate3d);
+		iv1 = (ImageView) findViewById(R.id.iv1);
+		iv2 = (ImageView) findViewById(R.id.iv2);
+		b1 = (ToggleButton) findViewById(R.id.b1);
+		
+		b1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				b1.setClickable(false);
+				if(isChecked){
+					applyRotation(0, -90, R.id.iv1);
+				}else{
+					applyRotation(0, 90, R.id.iv2);
+				}
+				
+			}
+		});
+		
+	}
+	
+	private void applyRotation(float start, float end, final int viewId)
+    {
+        final float centerX = getWindow().getWindowManager().getDefaultDisplay().getWidth() / 2.0f;
+        final float centerY = getWindow().getWindowManager().getDefaultDisplay().getHeight() / 2.0f;
+        Rotate3dAnimation rotation = new Rotate3dAnimation(start, end, centerX, centerY, 2000.0f, true);
+        rotation.setDuration(800);
+        rotation.setInterpolator(new AccelerateInterpolator());
+
+        rotation.setAnimationListener(new AnimationListener()
+        {
+            @Override
+            public void onAnimationEnd(Animation arg0)
+            {
+
+                iv1.post(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        if(viewId == R.id.iv1)
+                        {
+                            iv2.setVisibility(View.GONE);
+                            iv1.setVisibility(View.VISIBLE);
+                            Rotate3dAnimation rotatiomAnimation = new Rotate3dAnimation(90, 0, centerX, centerY, 2000.0f, false);
+                            rotatiomAnimation.setDuration(500);
+                            rotatiomAnimation.setInterpolator(new DecelerateInterpolator());
+                            iv1.startAnimation(rotatiomAnimation);
+
+                        }
+                        if(viewId == R.id.iv2)
+                        {
+                            iv1.setVisibility(View.GONE);
+                            iv2.setVisibility(View.VISIBLE);
+                            Rotate3dAnimation rotatiomAnimation = new Rotate3dAnimation(-90, 0, centerX, centerY, 2000.0f, false);
+                            rotatiomAnimation.setDuration(500);
+                            rotatiomAnimation.setInterpolator(new DecelerateInterpolator());
+                            iv2.startAnimation(rotatiomAnimation);
+                        }
+
+                    }
+                });
+
+                b1.setClickable(true);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0)
+            {
+            }
+
+            @Override
+            public void onAnimationStart(Animation arg0)
+            {
+            }
+        });
+
+        if(viewId == R.id.iv2)
+        {
+            iv1.startAnimation(rotation);
+        }
+        if(viewId == R.id.iv1)
+        {
+            iv2.startAnimation(rotation);
+
+        }
+    }
+
+}
+{% endhighlight %}
+---
+布局文件rotate3d
+{% highlight java %}
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ToggleButton 
+        
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/b1"
+         android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        />
+  <RelativeLayout 
+      android:gravity="center"
+       android:layout_width="match_parent"
+    android:layout_height="match_parent"
+      >
+    <ImageView 
+        android:id="@+id/iv1"
+        android:src="@drawable/a_01"
+        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        />
+    <ImageView 
+        android:id="@+id/iv2"
+        android:src="@drawable/a_02"
+        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        />
+    </RelativeLayout>  
+
+</LinearLayout>
+{% endhighlight %}
+
+
