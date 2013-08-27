@@ -1,53 +1,79 @@
 ---
-title: webfrogs' Homepage
-layout: page
+layout: index
+title: codepiao
 ---
-
-<ul class="listing">
+{% include codepiano/setup %}
+<!-- 按照分页插入博客文章 -->
 {% for post in paginator.posts %}
-  {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
-  {% if year != y %}
-    {% assign year = y %}
-    <li class="listing-seperator">{{ y }}</li>
-  {% endif %}
-  <li class="listing-item">
-    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-  </li>
-{% endfor %}
-</ul>
+  <h2 class="title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+  <div class="post_info">
+  {% unless post.categories == empty %}
+  <ul class="tag_box inline">
+    <li><i class="icon-calendar"></i></li>
+    <li id="post-date">{{ post.date | date: " %Y 年 %m 月 %d 日" }}</li>
+    <li><i class="icon-folder-open"></i></li>
+    {% assign post_categories = post.categories %}
+    {% include codepiano/post_categories_info %}
+  </ul>
+  {% endunless %}
+  <span>
+  </div>
+  <div class="archive">
+    {{ post.content }}
+  </div>
+  <hr />
+  {% endfor %}
 
-<div id="post-pagination" class="paginator">
+  <!-- 分页页码展示 -->
+  <div id="post-pagination" class="pagination pagination-centered">
+    <ul>
+      <!-- 上一页按钮 -->
+      {% if paginator.previous_page %}
+      <li>
+        {% if paginator.previous_page == 1 %}
+        <a href="/"><i class="icon-chevron-left"></i></a>
+        {% else %}
+        <a href="/page{{ paginator.previous_page }}"><i class="icon-chevron-left"></i></a>
+        {% endif %}
+      </li>
+      {% else %}
+      <li class="disabled">
+      <span><i class="icon-chevron-left"></i></span>
+      </li>
+      {% endif %}
 
-  {% if paginator.previous_page %}
-    {% if paginator.previous_page == 1 %}
-    <a href="/"><前页</a>
-    {% else %}
-    <a href="/page{{paginator.previous_page}}"><前页</a>
-    {% endif %}
-  {% else %}
-    <span class="previous disabled"><前页</span>
-  {% endif %}
-
+      <!-- 第一页,访问根目录 -->
       {% if paginator.page == 1 %}
-      <span class="current-page">1</span>
+      <li class="active">
+      <a href="#">1</a>
+      </li>
       {% else %}
+      <li>
       <a href="/">1</a>
+      </li>
       {% endif %}
 
-    {% for count in (2..paginator.total_pages) %}
+      {% for count in (2..paginator.total_pages) %}
       {% if count == paginator.page %}
-      <span class="current-page">{{count}}</span>
+      <li class="active">
+      <a href="#">{{ count }}</a>
+      </li>
       {% else %}
-      <a href="/page{{count}}">{{count}}</a>
+      <li>
+      <a href="/page{{ count }}">{{ count }}</a>
+      </li>
       {% endif %}
-    {% endfor %}
+      {% endfor %}
 
-  {% if paginator.next_page %}
-    <a class="next" href="/page{{paginator.next_page}}">后页></a>
-  {% else %}
-    <span class="next disabled" >后页></span>
-  {% endif %}
-  (共{{ paginator.total_posts }}篇)
-</div>
+      {% if paginator.next_page %}
+      <li>
+      <a href="/page{{ paginator.next_page }}"><i class="icon-chevron-right"></i></a>
+      </li>
+      {% else %}
+      <li class="disabled">
+      <a href="#"><i class="icon-chevron-right"></i></a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
 
