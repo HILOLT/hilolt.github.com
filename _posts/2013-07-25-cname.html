@@ -1,0 +1,27 @@
+---
+layout: post
+keywords: 域名,CNAME
+description: 域名,CNAME
+title: "github域名绑定"
+categories: [github]
+tags: [github, cname]
+icon: file-alt
+---
+<h3>需求：github的库名字为“hilolt.github.com”，自己的域名为"hilolt.info",将“hilolt.github.com”绑定到"hilolt.info"。</h3>
+
+<h3>***步骤1***</h3>
+
+在hilolt.github.com根目录下建立CNAME文件，用文本编译器打开写入hilolt.info，保存。
+
+<h3>**步骤2**</h3>
+	
+登陆[https://www.dnspod.cn/](https://www.dnspod.cn/)，设置如下：
+![dnspot](/assets/images/CNAME.jpg)
+
+<h3>**步骤3**</h3>
+<s>修改_config.yml里的BASE_PATH为“BASE_PATH : /”。</s>
+修改_config.yml里的BASE_PATH为“BASE_PATH :  ”。
+
+<h3>**步骤4**</h3>
+  push到github。
+
