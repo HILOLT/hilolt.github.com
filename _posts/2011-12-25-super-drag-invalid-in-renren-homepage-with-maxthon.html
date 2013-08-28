@@ -1,17 +1,15 @@
 ---
 layout: post
-title: 人人网主页在遨游浏览器内超级拖放功能失效
-keywords: 人人网,傲游浏览器,超级拖放,失效
-description: 傲游浏览器浏览人人网主页超级拖放功能失效
-categories: [Web, Javascript]
-tags: [Javascript]
-group: archive
-icon: globe
+keywords: android,asynctask,异步加载图片
+description: android异步下载网络图片
+title: "android异步下载网络图片"
+categories: [android]
+tags: [android, asyntask]
+icon: file-alt
 ---
 {% include hilolt/setup %}
+<h1>AsyncTask：</h1>
 
-##**AsyncTask：**
----
 	继承AsyncTask后，要实现三个重要的方法：
 	{% highlight java %}
 	 /**
@@ -40,7 +38,7 @@ icon: globe
 	{% endhighlight %}
 
 
-### LoadImageAsyncTask.java
+<h2><B> LoadImageAsyncTask.java</B></h2>
 {% highlight java %}
 
 public class LoadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
@@ -89,7 +87,7 @@ public class LoadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
 }
 {% endhighlight %}
 
-### LoadImageCallBack.java
+<h2><B> LoadImageCallBack.java</B></h2>
 {% highlight java %}
 /**
  * 回调接口,如果要使用LoadImageAsyncTask这个类，必须要实现beforeImageLoad()和afterImageLoad()这两个接口。
@@ -102,7 +100,7 @@ public interface LoadImageCallBack{
 }
 {% endhighlight %}
 
-### Demo.java
+<h2><B>Demo.java</B></h2>
 {% highlight java %}
 public class Demo extends Activity{
 	ImageView image ;
@@ -139,5 +137,4 @@ public class Demo extends Activity{
 		mTask.execute("http://jekyllrb.com/img/octojekyll.png");
 	}
 {% endhighlight %}
-[示例]
-![示例](/assets/images/Screenshot_2013-07-23-17-26-56.png)
+<a href="/assets/images/Screenshot_2013-07-23-17-26-56.png">[示例]</a>
