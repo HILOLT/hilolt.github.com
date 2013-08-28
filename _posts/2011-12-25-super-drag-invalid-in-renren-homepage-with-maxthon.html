@@ -10,37 +10,134 @@ icon: globe
 ---
 {% include codepiano/setup %}
 
-<p class="paragraph">
-很少在人人网主页使用超级拖放功能进行搜索，今天同学发了一条状态，“6.73很欢乐”。
-不知道6.73是什么意思，拖放搜了下，没出结果，我也没在意，直接又选中文字右键搜了下。
-排名第一的居然是豆瓣的一个帖子 ，说是Dota出6.73版了
-</p>
+##**AsyncTask：**
+------------------------------------------------
+	继承AsyncTask后，要实现三个重要的方法：
+	{% highlight java %}
+	 /**
+	 * 在异步任务执行执行调用的方法，此处不能设置耗时的操作，否则会ANR异常。
+	 */
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+	}
 
-<p class="paragraph">
-后来同学回复我的状态说超级拖放不能用了，才想着看看是哪的问题。遨游的这类附加功能应该也是监听事件来实现的，
-去w3cshool查DOM和javascript中对的事件的支持，并没有拖放事件。不过遨游兼容模式是IE内核，极速模式是WEBKit内核，
-去网上搜 "IE 拖放事件"，查出来微软在IE里面增加了拖放事件的监听，搜weikit支持的事件，也有对拖放事件的支持。
-这样问题就大概清楚了，估计是人人网的javascript脚本拦截或者覆盖了拖放事件，导致遨游浏览器收不到触发的拖放事件，
-所以拖放后没有任何反应
-</p>
+	/**
+	 * 在异步任务执行完毕后调用的方法，此处不能设置耗时的操作，否则会ANR异常。
+	 */
+	@Override
+	protected void onPostExecute(Bitmap result) {
+		super.onPostExecute(result);
+		
+	}
+	/**
+	 * 后台异步线程，执行耗时的操作，比如检查网络，下载文件，上传文件
+	 */
+	@Override
+	protected Bitmap doInBackground(String... params) {
 
-<p class="paragraph">
-用遨游自带的开发者工具看了看人人网js脚本里监听的事件，发现home.js中有代码监听了dragover事件，代码如下：
-</p>
+	}
+	{% endhighlight %}
 
-{% highlight javascript %}
 
-var _8f8=document.body;
-_8f8.addEventListener("dragover",function(e){
-e.preventDefault();
-return false;
-},false);
+### LoadImageAsyncTask.java
+{% highlight java %}
 
+public class LoadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
+	private LoadImageCallBack mLoadImageCallBack;
+	
+	public LoadImageAsyncTask(LoadImageCallBack mLoadImageCallBack) {
+		this.mLoadImageCallBack = mLoadImageCallBack;
+	}
+
+
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+		//在执行doInBackground()之前，我们可以给imageview设置一个默认的图片，类似于weibo和网易客户端
+		mLoadImageCallBack.beforeImageLoad();
+	}
+
+	
+	@Override
+	protected void onPostExecute(Bitmap result) {
+		super.onPostExecute(result);
+		//给imageview设置下载好的图片，result为下载好的图片
+		mLoadImageCallBack.afterImageLoad(result);
+		
+	}
+
+	@Override
+	protected Bitmap doInBackground(String... params) {
+		try {
+			String iconpath = params[0];
+			URL url = new URL(iconpath);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setConnectTimeout(5000);
+
+			InputStream is = conn.getInputStream();
+			Bitmap bitmap = BitmapFactory.decodeStream(is);
+			return bitmap;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+}
 {% endhighlight %}
 
-<p class="paragraph">
-就是这段代码造成超级拖放失效，代码获取了document的body节点，然后附加拖放事件的监听，如果拖放事件发生了，
-代码会调用后面的匿名函数进行处理，e.preventDefault()拦截了事件，通知浏览器不要执行与事件关联的默认动作，
-所以当拖放操作发生后，遨游收不到拖放操作发生的通知。 通过实验验证，把人人网主页另存到本地，找到这段代码，
-把e.preventDefault()删除，然后再打开就能进行正常的超级拖放。 综合附近的代码来看，监听器是为了实现拖放图片上传的功能
-</p>
+### LoadImageCallBack.java
+{% highlight java %}
+/**
+ * 回调接口,如果要使用LoadImageAsyncTask这个类，必须要实现beforeImageLoad()和afterImageLoad()这两个接口。
+ * @author HILOLT
+ *
+ */
+public interface LoadImageCallBack{
+	void beforeImageLoad();
+	void afterImageLoad(Bitmap result);
+}
+{% endhighlight %}
+
+### Demo.java
+{% highlight java %}
+public class Demo extends Activity{
+	ImageView image ;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		image = (ImageView) findViewById(R.id.image);
+		
+		LoadImageAsyncTask mTask = new LoadImageAsyncTask(new LoadImageCallBack() {
+			
+			@Override
+			public void beforeImageLoad() {
+				//设置默认图片
+				image.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_launcher));
+			}
+			
+			@Override
+			public void afterImageLoad(Bitmap result) {
+				LogUtils.logError("result", result);
+				if(result!=null)
+				{
+					image.setImageBitmap(result);
+				}else
+				{
+					//如果不成功，设置默认图片
+					image.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_launcher));
+				}
+			}
+			
+			
+		});
+		mTask.execute("http://jekyllrb.com/img/octojekyll.png");
+	}
+{% endhighlight %}
+[示例]
+![示例](/assets/images/Screenshot_2013-07-23-17-26-56.png)
