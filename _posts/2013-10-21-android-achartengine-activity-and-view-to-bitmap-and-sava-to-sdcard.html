@@ -1,0 +1,156 @@
+---
+layout: post
+keywords: android,achartegine,view to bitmap
+description: blog
+title: "自定义android achartengine,将生成的图标view转换成bitmap,并存储到sd卡"
+categories: [android,achartengine]
+tags: [android,achartengine,view to bitmap]
+icon: file-alt
+---
+
+<p class="paragraph">
+需求:最近的项目中用到了android achartengine , 将生成的图标的view绑定到控件上,并将生成的图表,保存成图片.
+</p>
+
+直接上代码吧.
+
+{% highlight java %}
+
+package com.achar.demo;
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+import org.achartengine.chart.BarChart.Type;
+import org.achartengine.model.CategorySeries;
+import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.renderer.SimpleSeriesRenderer;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Paint.Align;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.View;
+import android.view.View.MeasureSpec;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
+/**
+ * @author HILOLT
+ * 
+ * 需求:
+ * 在activity中展现achart,将view转换成图片,存储起来
+ * 
+ * 实现:
+ * 使用ChartFactory.getBarChartView生成view ,
+ * 使用GraphicalView来接收这个这个view ,
+ * 将view add到LinearLayout控件上.
+ *
+ */
+
+
+public class MainActivity extends CharActivity {
+	private LinearLayout l ;
+	private GraphicalView gv;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		
+		setContentView(R.layout.activity_main);
+		l = (LinearLayout) this.findViewById(R.id.view);
+		String[] titles = new String[] {"2009", "2008", "2007" };
+		List<double[]> values = new ArrayList<double[]>();
+		values.add(new double[] { 15230, 13300, 15240, 16244, 16900, 17200, 23030, 22200, 18500, 17500, 13600, 15000 });
+		values.add(new double[] { 14230, 12300, 14240, 15244, 15900, 19200, 22030, 21200, 19500, 15500, 12600, 14000 });
+		values.add(new double[] { 5230, 7300, 9240, 10540, 7900, 9200, 12030, 11200, 9500, 10500, 11600, 13500 });
+		
+		//titles color
+		int[] colors = new int[] {Color.GREEN ,Color.BLUE, Color.CYAN };
+		XYMultipleSeriesRenderer renderer = buildBarRenderer(colors);
+		/**
+		 	Parameters:
+				renderer the renderer to set the properties to
+				title the chart title
+				xTitle the title for the X axis
+				yTitle the title for the Y axis
+				xMin the minimum value on the X axis
+				xMax the maximum value on the X axis
+				yMin the minimum value on the Y axis
+				yMax the maximum value on the Y axis
+				axesColor the axes color
+				labelsColor the labels color
+		 */
+		setChartSettings(renderer, "Monthly sales in the last 2 years", "Month", "Units sold", 0.5, 12.5, 0, 24000, Color.GRAY, Color.LTGRAY);
+		renderer.getSeriesRendererAt(0).setDisplayChartValues(true);
+		renderer.getSeriesRendererAt(1).setDisplayChartValues(true);
+		renderer.setXLabels(12);
+		renderer.setYLabels(10);
+		renderer.setXLabelsAlign(Align.LEFT);
+		renderer.setYLabelsAlign(Align.LEFT);
+		renderer.setPanEnabled(true, false);
+		// renderer.setZoomEnabled(false);
+		renderer.setZoomRate(1.1f);
+		renderer.setBarSpacing(0.5f);
+		
+		l = (LinearLayout) this.findViewById(R.id.view);
+		l.setDrawingCacheEnabled(true);
+		gv = ChartFactory.getBarChartView(this, buildBarDataset(titles, values), renderer, Type.STACKED);
+		l.addView(gv, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		
+		/**
+		 * 起初生成的bitmap一直为null , 
+		 * 追其原因 :是因为在生成的图表的时候，view的尺寸还没有完全确定，不能进行绘制
+		 * 
+		 * 解决办法：使用了一个click事件进行view　to　bitmap
+		 */
+		
+	}
+	public void click(View view){
+		
+		try {
+			File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator+"abc/");
+			if (!file.exists()) {
+				file.mkdir();
+			}
+			File imageFile = new File(file, "xxx.jpg");
+			imageFile.createNewFile();
+			FileOutputStream fos = new FileOutputStream(imageFile);
+			getBitmapFromView(l).compress(CompressFormat.PNG, 100, fos);
+			fos.flush();
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	public static Bitmap getBitmapFromView(View view) {
+	    Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+	    Canvas canvas = new Canvas(returnedBitmap);
+	    Drawable bgDrawable =view.getBackground();
+	    if (bgDrawable!=null) 
+	        bgDrawable.draw(canvas);
+	    else 
+	        canvas.drawColor(Color.WHITE);
+	    view.draw(canvas);
+	    return returnedBitmap;
+	}
+
+	
+}
+
+{% endhighlight %}
+<a href="/assets/download/ACharDemo.zip"> 源码下载</a>
+ 
