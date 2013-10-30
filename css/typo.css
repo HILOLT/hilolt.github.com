@@ -154,11 +154,15 @@ pre, code {
 	word-wrap: break-word;
 }
 pre {
+
 	border: 1px solid #ddd;
 	border-left-width: 0.4em;
 	background: #002B36;
 	padding: 10px;
+	color:#93A1A1;
 }
+
+
 
 /* 一致化 horizonal rule */
 hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:10px;*color:pink;*filter:chroma(color=pink);height:10px;*margin:-7px 0 2px;}
