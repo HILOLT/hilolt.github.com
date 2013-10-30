@@ -23,7 +23,7 @@ icon: file-alt
 解决的办法有2种 , 至少目前我只找到2种,如果你想在不点击任何事件的情况下想自动获取bitmap , 那么你就得实时判断view的尺寸.
 方法一: 自定义view,如果你的view是RelativeLayout, 那么就集成extends RelativeLayout,重写onMeasure()这个方法:
 
-	```java
+```java
 	@Override
 		protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 			
@@ -49,7 +49,7 @@ icon: file-alt
 		
 			super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		}
-	```
+```
 	
 方法二:不用重写控件,直接给view添加监听事件:
 
