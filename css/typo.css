@@ -147,7 +147,7 @@ mark {
 	background: #fffdd1;
 }
 
-/* 代码片断 */
+/* 代码片断 
 pre, code {
 	font-family: "Courier New", Courier, monospace;
 	white-space: pre-wrap;
@@ -160,9 +160,13 @@ pre {
 	background: #002B36;
 	padding: 10px;
 	color:#93A1A1;
+}*/
+
+.highlight pre,code {
+  font-size: 15px;
+  background-color: #002B36;
+  color:#93A1A1;
 }
-
-
 
 /* 一致化 horizonal rule */
 hr{border:none;border-bottom:1px solid #cfcfcf;margin-bottom:10px;*color:pink;*filter:chroma(color=pink);height:10px;*margin:-7px 0 2px;}
