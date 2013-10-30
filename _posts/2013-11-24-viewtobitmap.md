@@ -22,6 +22,7 @@ icon: file-alt
 针对问题1 , 导致bitmap为null的主要原因是,view还没有真正的绘制完成,获得的view的尺寸为0 .
 解决的办法有2种 , 至少目前我只找到2种,如果你想在不点击任何事件的情况下想自动获取bitmap , 那么你就得实时判断view的尺寸.
 方法一: 自定义view,如果你的view是RelativeLayout, 那么就集成extends RelativeLayout,重写onMeasure()这个方法:
+
 ```
 @Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -51,6 +52,7 @@ icon: file-alt
 ```
 	
 方法二:不用重写控件,直接给view添加监听事件:
+
 ```
 view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -61,12 +63,14 @@ view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlob
 			}
 		});
 ```
+
 其中getViewTreeObserver().addOnGlobalLayoutListener的onGlobalLayout这个方法会执行多次,具体执行的次数要根据布局来判断,添加了
 此事件,即使view的尺寸还没有获得,也不会报错. 到目前为止,我只找到这个方法能在初始化layout的时候就去获得bitmap .
 
 ---------------------------------------
 
 针对问题2,是默认获得bitmap的尺寸就是当前可见的区域,我们可以获取全部的view ,可以这样做:
+
 ```
 public static Bitmap getBitmapFromView(View view) {
 		view.setDrawingCacheEnabled(true);
@@ -86,7 +90,9 @@ public static Bitmap getBitmapFromView(View view) {
 ```
 
 其中,
+
 ```
 view.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED))
 ```
+
 就是获得全部的view,即使你的界面很长,也可以全部转成bitmap 了.
