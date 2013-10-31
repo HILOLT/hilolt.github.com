@@ -21,6 +21,10 @@
     if($('#support a')[0]){
       $('#support a').tooltip(tooltipConfig);
     }
+    
+    /* google prettyprint*/
+    $('pre').addClass('prettyprint linenums');
+    /*$.getScript('http://google-code-prettify.googlecode.com/svn/loader/run_prettify.js');*/
 
     /* 目录页导航 */
     var url = window.location.href;
