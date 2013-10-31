@@ -52,7 +52,10 @@
         tableReference.fnFilter( this.value, 2);
       } );
 
-	  /*google prettifyy*/
+    }
+  });
+
+/*google prettifyy*/
 $('pre').addClass('prettyprint linenums'); //添加Google code Hight需要的class
 !function(){var r=null;
 (function(){function X(e){function j(){try{J.doScroll("left")}catch(e){P(j,50);return}w("poll")}function w(j){if(!(j.type=="readystatechange"&&x.readyState!="complete")&&((j.type=="load"?n:x)[z](i+j.type,w,!1),!m&&(m=!0)))e.call(n,j.type||j)}var Y=x.addEventListener,m=!1,C=!0,t=Y?"addEventListener":"attachEvent",z=Y?"removeEventListener":"detachEvent",i=Y?"":"on";if(x.readyState=="complete")e.call(n,"lazy");else{if(x.createEventObject&&J.doScroll){try{C=!n.frameElement}catch(A){}C&&j()}x[t](i+"DOMContentLoaded",
@@ -89,8 +92,7 @@ prettyPrint:e=e=function(a,d){function e(){for(var b=V.PR_SHOULD_USE_CONTINUATIO
 P(e,250):"function"===typeof a&&a()}for(var b=d||document.body,i=b.ownerDocument||document,b=[b.getElementsByTagName("pre"),b.getElementsByTagName("code"),b.getElementsByTagName("xmp")],j=[],m=0;m<b.length;++m)for(var l=0,n=b[m].length;l<n;++l)j.push(b[m][l]);var b=r,c=Date;c.now||(c={now:function(){return+new Date}});var p=0,t,q=/\blang(?:uage)?-([\w.]+)(?!\S)/,f=/\bprettyprint\b/,w=/\bprettyprinted\b/,y=/pre|xmp/i,u=/^code$/i,g=/^(?:pre|code|xmp)$/i,k={};e()}};typeof define==="function"&&define.amd&&
 define("google-code-prettify",[],function(){return X})})();return e}();R||P(Q,0)})();}()
 
-    }
-  });
+
 
 }(window.jQuery);
 
