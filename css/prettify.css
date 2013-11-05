@@ -6,12 +6,12 @@
  */
 
 .str{color: #EC7600;}
-.kwd{color:#7F0055;}
-.com{color:#3F7F5F;}
+.kwd{color:#93C763;}
+.com{color:#66747B;}
 .typ{color:#678CB1;}
-.lit{color:#646464;}
+.lit{color:#FACD22;}
 .pun{color:#F1F2F3;}
-.pln{color:#000000;}
+.pln{color:#F1F2F3;}
 .tag{color:#8AC763;}
 .atn{color:#E0E2E4;}
 .atv{color:#EC7600;}
@@ -23,7 +23,7 @@ li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9{color:#fff;
 li.L1, li.L3, li.L5, li.L7, li.L9{background:#002B36;}
 @media print {
     .str{color:#060;}
-    .kwd{color:#7F0055;font-weight:bold;}
+    .kwd{color:#006;font-weight:bold;}
     .com{color:#600;font-style:italic;}
     .typ{color:#404;font-weight:bold;}
     .lit{color:#044;}
