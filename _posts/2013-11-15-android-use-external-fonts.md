@@ -10,13 +10,11 @@ icon: file-alt
 ---
 
 
-#android 使用外部的字体很简单,就几行代码,但有的字体不能很好的支持中文,而有的字体有不能区分英文的大小写,本人推荐我们项目中生成pdf的字体:simsun.ttc,
-能够很好的支持中英文.
+##**android使用外部的字体很简单,就几行代码,但有的字体不能很好的支持中文,而有的字体有不能区分英文的大小写,本人推荐我们项目中生成pdf的字体:simsun.ttc,能够很好的支持中英文.**
 
 ---------------------
 
 ```java
-
 package com.example.androidhive;
 
 import android.app.Activity;

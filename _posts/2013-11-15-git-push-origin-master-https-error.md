@@ -9,7 +9,7 @@ group: archive
 icon: file-alt
 ---
 
-#今天在添加新文章,git push origin master 时,出错啦,错误信息:
+##**今天在添加新文章,git push origin master 时,出错啦,错误信息:
 	
 	G:\hilolt.github.com>git push origin master
 	error: SSL peer certificate or SSH remote key was not OK while accessing https:/
