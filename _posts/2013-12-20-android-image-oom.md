@@ -9,7 +9,7 @@ group: archive
 icon: file-alt
 ---
 
-##**高效加载大图片**
+##**1.高效加载大图片**
 ----
 
 我们在编写Android程序的时候经常要用到许多图片，不同图片总是会有不同的形状、不同的大小，但在大多数情况下，这些图片都会大于我们程序所需要的大小。比如说系统图片库里展示的图片大都是用手机摄像头拍出来的，这些图片的分辨率会比我们手机屏幕的分辨率高得多。大家应该知道，我们编写的应用程序都是有一定内存限制的，程序占用了过高的内存就容易出现OOM(OutOfMemory)异常。我们可以通过下面的代码看出每个应用程序最高可用内存是多少。
@@ -33,6 +33,7 @@ BitmapFactory这个类提供了多个解析方法(decodeByteArray, decodeFile, d
 	* 用于展示这张图片的控件的实际大小。
 	* 当前设备的屏幕尺寸和分辨率。
 比如，你的ImageView只有128*96像素的大小，只是为了显示一张缩略图，这时候把一张1024*768像素的图片完全加载到内存中显然是不值得的。那我们怎样才能对图片进行压缩呢？通过设置BitmapFactory.Options中inSampleSize的值就可以实现。比如我们有一张2048*1536像素的图片，将inSampleSize的值设置为4，就可以把这张图片压缩成512*384像素。原本加载这张图片需要占用13M的内存，压缩后就只需要占用0.75M了(假设图片是ARGB_8888类型，即每个像素点占用4个字节)。下面的方法可以根据传入的宽和高，计算出合适的inSampleSize值：
+
 	public static int calculateInSampleSize(BitmapFactory.Options options,
                 int reqWidth, int reqHeight) {
         // 源图片的高度和宽度
@@ -52,6 +53,7 @@ BitmapFactory这个类提供了多个解析方法(decodeByteArray, decodeFile, d
 	}
 
 使用这个方法，首先你要将BitmapFactory.Options的inJustDecodeBounds属性设置为true，解析一次图片。然后将BitmapFactory.Options连同期望的宽度和高度一起传递到到calculateInSampleSize方法中，就可以得到合适的inSampleSize值了。之后再解析一次图片，使用新获取到的inSampleSize值，并把inJustDecodeBounds设置为false，就可以得到压缩后的图片了。
+
 	public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
 			int reqWidth, int reqHeight) {
 			// 第一次解析将inJustDecodeBounds设置为true，来获取图片大小
@@ -66,16 +68,18 @@ BitmapFactory这个类提供了多个解析方法(decodeByteArray, decodeFile, d
 	}
 	
 下面的代码非常简单地将任意一张图片压缩成100*100的缩略图，并在ImageView上展示。
+
 	mImageView.setImageBitmap(
     decodeSampledBitmapFromResource(getResources(), R.id.myimage, 100, 100));
 	
-##**使用图片缓存技术**
+##**2.使用图片缓存技术**
 ----
 
 在你应用程序的UI界面加载一张图片是一件很简单的事情，但是当你需要在界面上加载一大堆图片的时候，情况就变得复杂起来。在很多情况下，（比如使用ListView, GridView 或者 ViewPager 这样的组件），屏幕上显示的图片可以通过滑动屏幕等事件不断地增加，最终导致OOM。为了保证内存的使用始终维持在一个合理的范围，通常会把被移除屏幕的图片进行回收处理。此时垃圾回收器也会认为你不再持有这些图片的引用，从而对这些图片进行GC操作。用这种思路来解决问题是非常好的，可是为了能让程序快速运行，在界面上迅速地加载图片，你又必须要考虑到某些图片被回收之后，用户又将它重新滑入屏幕这种情况。这时重新去加载一遍刚刚加载过的图片无疑是性能的瓶颈，你需要想办法去避免这个情况的发生。这个时候，使用内存缓存技术可以很好的解决这个问题，它可以让组件快速地重新加载和处理图片。下面我们就来看一看如何使用内存缓存技术来对图片进行缓存，从而让你的应用程序在加载很多图片的时候可以提高响应速度和流畅性。内存缓存技术对那些大量占用应用程序宝贵内存的图片提供了快速访问的方法。其中最核心的类是LruCache(此类在android-support-v4的包中提供) 。这个类非常适合用来缓存图片，它的主要算法原理是把最近使用的对象用强引用存储在 LinkedHashMap 中，并且把最近最少使用的对象在缓存值达到预设定值之前从内存中移除。
 
 在过去，我们经常会使用一种非常流行的内存缓存技术的实现，即软引用或弱引用 (SoftReference or WeakReference)。但是现在已经不再推荐使用这种方式了，因为从 Android 2.3 (API Level 9)开始，垃圾回收器会更倾向于回收持有软引用或弱引用的对象，这让软引用和弱引用变得不再可靠。另外，Android 3.0 (API Level 11)中，图片的数据会存储在本地的内存当中，因而无法用一种可预见的方式将其释放，这就有潜在的风险造成应用程序的内存溢出并崩溃。
 为了能够选择一个合适的缓存大小给LruCache, 有以下多个因素应该放入考虑范围内，例如：
+
 	* 你的设备可以为每个应用程序分配多大的内存？
 	* 设备屏幕上一次最多能显示多少张图片？有多少图片需要进行预加载，因为有可能很快也会显示在屏幕上？
 	* 你的设备的屏幕大小和分辨率分别是多少？一个超高分辨率的设备（例如 Galaxy Nexus) 比起一个较低分辨率的设备（例如 Nexus S），在持有相同数量图片的时候，需要更大的缓存空间。
@@ -130,6 +134,7 @@ BitmapFactory这个类提供了多个解析方法(decodeByteArray, decodeFile, d
 	}
 
 BitmapWorkerTask 还要把新加载的图片的键值对放到缓存中。
+
 	class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
 			// 在后台加载图片。
 			@Override
