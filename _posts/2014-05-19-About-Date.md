@@ -1,9 +1,16 @@
 ---
-layout: page
-title:	About Date
-category: blog
-description: 
+layout: post
+keywords: hilolt
+description: hilolt
+title: "About Date "
+categories: [Archive]
+tags: [Archive]
+group: archive
+icon: file-alt
 ---
+{% include 
+/setup %}
+
 
 # 各世界时间标准
 我们经常遇到这4种时间：GMT,UTC,DST,CST。google了一下，在此做个小结.
