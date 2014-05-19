@@ -8,8 +8,6 @@ tags: [Archive]
 group: archive
 icon: file-alt
 ---
-{% include 
-/setup %}
 
 
 # 各世界时间标准
