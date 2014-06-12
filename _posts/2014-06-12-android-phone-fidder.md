@@ -22,17 +22,23 @@ icon: file-alt
 	
 	
 【打开Fdder】	
+
 <img src="/assets/images/fidder/f1.jpg"></img>
 
 【设置Fidder :Tools - Fidder Options】
+
 <img src="/assets/images/fidder/f2.jpg"></img>
+
 <img src="/assets/images/fidder/f3.jpg"></img>
 
 【获取本机IP地址】
+
 <img src="/assets/images/fidder/f4.jpg"></img>
 
 【长按已连接的wifi，修改网络，显示高级】
+
 <img src="/assets/images/fidder/f6.png"></img>
+
 <img src="/assets/images/fidder/f7.png"></img>
 
 # ok ，到这里我们就可以在Fidder里看到手机的网络请求信息了。
