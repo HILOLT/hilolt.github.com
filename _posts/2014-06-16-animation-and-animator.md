@@ -16,8 +16,10 @@ icon: file-alt
 	在ObjectAnimator中，View的每个属性被修改后会调用invalidate()让container进行重绘。这样如果一个ObjectAnimator动画同时修改x，y的话，会invalidate两次。新的系统中View增加了一个animate方法，返回一个ViewPropertyAnimator，它通过ObjectAnimator对View进行了封装，针对以上两个性能优化点进行了优化。它直接调用View的setX、setAlpha等方法设置property；另外，它会在一次valueupdate回调中同时设置x,y的值然后再调用invalidate，这样就减少了重绘的频率。
 	
 ## Google提供的示例：
-	
-		/*
+
+---------------
+
+> /*
 	 * Copyright (C) 2010 The Android Open Source Project
 	 *
 	 * Licensed under the Apache License, Version 2.0 (the "License");

@@ -57,12 +57,12 @@ html, body, div.wrapper {
 
 blockquote {
   font-size: 15px;
-  background-color: #002B36;
-  color:#93A1A1;
+  background-color: #FBFBFB;
+  color:#000000;
 }
 
 blockquote p {
-  font-size: 15px;
+  font-size: 18px;
 }
 /* 瑕嗙洊bootstrap瀵艰埅鏉¤缃�*/
 a.brand {
