@@ -11,57 +11,55 @@ icon: file-alt
 
 ## Animator是android 4.0新添加的一个动画框架，与之前的animation相比，animator可以进行更精确细化的动画控制，简单高效，能自动驱动，减少动画过程中重复绘制，在不影响效果的前提下，减少CUP的消耗。
 
-	1、property的setter/getter是通过reflection或者jni来是实现的，如果知道Object的setter/getter方法可以直接调用，节省性能；
-
-	2、多个animator并行执行。通过定义多个ObjectAnimator，然后通过AnimatorSet的playTogether接口来调用。这个可以通过ViewPropertyHolder将需要多个animator优化为只需要一个animator来实现。同样节省了性能；
-
-	3、在ObjectAnimator中，View的每个属性被修改后会调用invalidate()让container进行重绘。这样如果一个ObjectAnimator动画同时修改x，y的话，会invalidate两次。新的系统中View增加了一个animate方法，返回一个ViewPropertyAnimator，它通过ObjectAnimator对View进行了封装，针对以上两个性能优化点进行了优化。它直接调用View的setX、setAlpha等方法设置property；另外，它会在一次valueupdate回调中同时设置x,y的值然后再调用invalidate，这样就减少了重绘的频率。
+	property的setter/getter是通过reflection或者jni来是实现的，如果知道Object的setter/getter方法可以直接调用，节省性能；
+	多个animator并行执行。通过定义多个ObjectAnimator，然后通过AnimatorSet的playTogether接口来调用。这个可以通过ViewPropertyHolder将需要多个animator优化为只需要一个animator来实现。同样节省了性能；
+	在ObjectAnimator中，View的每个属性被修改后会调用invalidate()让container进行重绘。这样如果一个ObjectAnimator动画同时修改x，y的话，会invalidate两次。新的系统中View增加了一个animate方法，返回一个ViewPropertyAnimator，它通过ObjectAnimator对View进行了封装，针对以上两个性能优化点进行了优化。它直接调用View的setX、setAlpha等方法设置property；另外，它会在一次valueupdate回调中同时设置x,y的值然后再调用invalidate，这样就减少了重绘的频率。
 	
 ## Google提供的示例：
 	
-	/*
- * Copyright (C) 2010 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+		/*
+	 * Copyright (C) 2010 The Android Open Source Project
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 *      http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 
-package com.example.android.apis.animation;
+	package com.example.android.apis.animation;
 
-// Need the following import to get access to the app resources, since this
-// class is in a sub-package.
-import android.graphics.drawable.ColorDrawable;
-import com.example.android.apis.R;
+	// Need the following import to get access to the app resources, since this
+	// class is in a sub-package.
+	import android.graphics.drawable.ColorDrawable;
+	import com.example.android.apis.R;
 
-import android.animation.*;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RadialGradient;
-import android.graphics.Shader;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.LinearLayout;
+	import android.animation.*;
+	import android.app.Activity;
+	import android.content.Context;
+	import android.graphics.Canvas;
+	import android.graphics.Paint;
+	import android.graphics.RadialGradient;
+	import android.graphics.Shader;
+	import android.graphics.drawable.ShapeDrawable;
+	import android.graphics.drawable.shapes.OvalShape;
+	import android.os.Bundle;
+	import android.view.MotionEvent;
+	import android.view.View;
+	import android.view.animation.AccelerateInterpolator;
+	import android.view.animation.DecelerateInterpolator;
+	import android.widget.LinearLayout;
 
-import java.util.ArrayList;
+	import java.util.ArrayList;
 
 
-public class BouncingBalls extends Activity {
+	public class BouncingBalls extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
