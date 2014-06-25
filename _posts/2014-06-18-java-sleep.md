@@ -62,7 +62,11 @@ interrupt()中断线程。需要注意的是，InterruptedException是线程自�
 
 
 ## 各个方法之间的区别
-线程方法名称	是否释放同步锁	是否需要在同步的代码块中调用	方法是否已废弃	是否可以被中断
+线程方法名称					sleep()		wait()		suspend		resume()	join()
+是否释放同步锁		
+是否需要在同步的代码块中调用	
+方法是否已废弃	
+是否可以被中断
 sleep()	否	否	否	是
 wait()	是	是	否	是
 suspend	 	 	是	 
