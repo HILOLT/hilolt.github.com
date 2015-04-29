@@ -4,8 +4,7 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 auto: true
 pygments: true
 paginate: 4
-markdown: GitHub
-
+markdown: rdiscount
 
 title : ::不浮夸，不骄躁，重人品，尚技术!
 author :
